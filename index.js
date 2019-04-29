@@ -15,8 +15,9 @@ function parseQuery(query, fastify) {
 					query[k] = parseInclude(query[k], fastify)
 				}
 			}
-		})
-	return query
+        })
+    
+	return typeof query != 'string' ? JSON.stringify(query) : query
 }
 
 function parseInclude(include, fastify) {
