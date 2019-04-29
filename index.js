@@ -24,13 +24,12 @@ function parseInclude(include, fastify) {
 		.forEach(k => {
 			if (k == 'model') {
 				let model = fastify.sequelize.models[include[k]]
-				console.log(`${include[k]}`, model)
 				if (!!model) {
 					include[k] = model
 				} else {
 					const models = Object.keys(fastify.sequelize.models)
 					const meant = models.find(m => m.toLowerCase() == include[k].toLowerCase())
-					throw new Error(`Model ${include[k]} does not exist. ${meant ? `Did you mean '${meant}'?` : ''}`)
+					throw new Error(`Model '${include[k]}' does not exist. ${meant ? `Did you mean '${meant}'?` : ''}`)
 				}
 			} else if (k == 'include' && typeof include[k] != 'string') {
 				if (Array.isArray(include[k])) {
@@ -54,7 +53,6 @@ module.exports = fp(function (fastify, opts, next) {
 				return reply.code(err.statusCode).send(err)
 			}
 		}
-		console.log("Parsed query", request.query.q)
 		return next()
 	})
 	return next()
