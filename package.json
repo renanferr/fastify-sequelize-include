@@ -1,6 +1,6 @@
 {
   "name": "fastify-sequelize-include",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Open source library to parse Fastify-Sequelize querystrings and include the Sequelize Model constructor class where is its name.",
   "main": "index.js",
   "scripts": {
